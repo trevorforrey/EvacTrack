@@ -39,6 +39,7 @@ var schema = buildSchema(`
     type Query {
         users: [User]
         homes: [Home]
+        evacuations: [Evacuation]
     }
     type Mutation {
         evac_toggle(owner:String!):Home
