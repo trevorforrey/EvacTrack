@@ -5,31 +5,31 @@ var { buildSchema } = require('graphql');
 
 // GraphQL schema
 var schema = buildSchema(`
-    type user {
-        name: name!
+    type User {
+        name: Name!
         email: String!
         phone_number: String!
-        home: home!
+        home: Home!
         user_type: String!
     }
-    type home {
-        owner: user!
+    type Home {
+        owner: User!
         address: address!
         evacuated: Boolean!
         people_in_house: Int!
         pets_in_house: Int!
     }
-    type evacuation{
-        date: String
-        evac_type: String
-        homes_evacuated:[home]
+    type Evacuation{
+        date: String!
+        evac_type: String!
+        homes_evacuated:[Home!]
     }
 
-    type name {
+    type Name {
         first: String!
         last: String!
     }
-    type address {
+    type Address {
         street: String!
         city: String!
         state: String!
@@ -37,11 +37,11 @@ var schema = buildSchema(`
     }
 
     type Query {
-        users: [House]
+        users: [User]
     }
     type Mutation {
-        evac_toggle(owner:String!):House
-        evac(owner:String!):House
+        evac_toggle(owner:String!):Home
+        evac(owner:String!):Home
     }
 `);
 
