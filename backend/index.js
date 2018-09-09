@@ -52,11 +52,14 @@ const start = async () => {
     const Client = await MongoClient.connect("mongodb+srv://tforrey:mongopw@evac-db-cluster-mypdv.mongodb.net/test?retryWrites=true",{ useNewUrlParser: true })
     const Homes = Client.db("EvacTrack").collection("Homes")
     const Users = Client.db("EvacTrack").collection("Users")
+    const Evacuations = Client.db("EvacTrack").collection("Evacuations")
 
     // Gets all users
     var get_all_users = async function() {
         return (await Users.find({}).toArray()).map(add_house_to_user)
     }
+
+    // Get all homes
     var get_all_homes = async function() {
         return (await Homes.find({}).toArray()).map(add_user_to_house)
     }
@@ -71,6 +74,11 @@ const start = async () => {
         house = Homes.findOne({_id:user.home_id})
         user.home = house
         return user
+    }
+
+    // Get all evacuations
+    var get_all_evacuations = async function() {
+        return (Evacuations.find({}).toArray())
     }
 
     // Toggles Evacuation status
@@ -90,6 +98,7 @@ const start = async () => {
     var root = {
         users: get_all_users,
         homes: get_all_homes,
+        evacuations: get_all_evacuations,
         evac_toggle: evac_toggle,
         evac: set_evac_true
     };
