@@ -3,6 +3,8 @@ package com.example.europa.evactrack;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Person;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -61,6 +63,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private String userType = "home owner";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,7 +334,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    // If email in database and data returned then return true and set data
+                    // TODO hi hello reliant on api
+                    return true;
                 }
             }
 
@@ -342,9 +348,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
+            Intent intent = null;
+            if (mEmailView.getText().equals("foo@example.com"))
+                intent = new Intent(LoginActivity.this, UserActivity.class);
+            else
+                intent = new Intent( LoginActivity.this, PersonnelActivity.class);
 
             if (success) {
-                finish();
+                startActivity(intent);
+                //finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

@@ -33,7 +33,8 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_user" />
+
+    <include android:id="@+id/blah" layout="@layout/content_user" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -42,6 +43,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"/>
-        <!--app:srcCompat="@drawable/ic_person_black_48dp" /> -->
+
+    <!--app:srcCompat="@drawable/ic_person_black_48dp" /> -->
 
 </android.support.design.widget.CoordinatorLayout>

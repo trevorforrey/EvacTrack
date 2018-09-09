@@ -6,24 +6,37 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends MainActivity {
+
+    private String name = "John Doe";
+    private String email = "foo@example.com";
+    private String address = "1234 Abcd St";
+    private String houseSize = "5 house members";
+    private String petSize = "2 pets";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //AppBar mActionBarToolbar = (AppBar) findViewById(R.id.app_bar);
+        //setSupportActionBar(mActionBarToolbar);
+        //getSupportActionBar().setTitle("My title");
+        //super.onCreateDrawer();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView mName = (TextView)findViewById(R.id.user);
+        TextView mEmail = (TextView)findViewById(R.id.email);
+        TextView mAddress = (TextView)findViewById(R.id.address);
+        TextView mHouseSize = (TextView)findViewById(R.id.housemembers);
+        TextView mPetSize = (TextView)findViewById(R.id.petmembers);
+
+
+        mName.setText("Owner: " + name);
+        mEmail.setText("Email: " + email);
+        mAddress.setText("Address: " + address);
+        mHouseSize.setText("House Members: " + houseSize);
+        mPetSize.setText("Pets: " + petSize);
+
     }
 }

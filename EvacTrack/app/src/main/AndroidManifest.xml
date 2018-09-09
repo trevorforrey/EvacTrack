@@ -54,7 +54,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.europa.evactrack.HomeActivity" />
         </activity>
-        \
+
         <activity
             android:name=".EvacuationActivity"
             android:label="@string/title_activity_evacuation"
