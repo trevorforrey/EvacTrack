@@ -21,19 +21,25 @@ var schema = buildSchema(`
     type Query {
         users: [House]
     }
+    type Mutation {
+        escape(owner:String!):House
+    }
 `);
 const start = async () => {
     const Client = await MongoClient.connect("mongodb+srv://tforrey:mongopw@evac-db-cluster-mypdv.mongodb.net/test?retryWrites=true")
     const Homes = Client.db("EvacTrack").collection("Homes")
     // Root resolver
+    var toggle_escape = async function({owner}) {
+        house = await Homes.findOne({owner:owner})
+        console.log(house)
+        await Homes.updateOne({owner:owner},{$set:{evacuated:!house.evacuated}})
+        return await Homes.findOne({owner:owner})
+    }
     var root = {
         users: () => {
             return (Homes.find({}).toArray())
-        }
-        // escape: ({owner}) => {
-        //     Homes.updateOne({owner:{$eq: owner}},{$set: {evacuated: true}})
-        //     return Homes.find({owner:{$eq: owner}}).toArray()[0]
-        // }
+        },
+        escape: toggle_escape
     };
     // Create an express server and a GraphQL endpoint
     var app = express();
