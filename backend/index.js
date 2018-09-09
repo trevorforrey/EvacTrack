@@ -79,7 +79,10 @@ const start = async () => {
 
     // Get all evacuations
     var get_all_evacuations = async function() {
-        return (Evacuations.find({}).toArray())
+        return (await Evacuations.find({}).toArray()).map(function(evac) {
+            evac.date = evac.date.toString()
+            return evac
+        })
     }
 
     // Toggles Evacuation status
