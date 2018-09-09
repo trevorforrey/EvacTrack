@@ -25,6 +25,7 @@ var schema = buildSchema(`
         escape(owner:String!):House
     }
 `);
+
 const start = async () => {
     const Client = await MongoClient.connect("mongodb+srv://tforrey:mongopw@evac-db-cluster-mypdv.mongodb.net/test?retryWrites=true")
     const Homes = Client.db("EvacTrack").collection("Homes")
@@ -48,7 +49,6 @@ const start = async () => {
         rootValue: root,
         graphiql: true
     }));
-
 
     app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
 }
