@@ -38,6 +38,7 @@ var schema = buildSchema(`
 
     type Query {
         users: [User]
+        homes: [Home]
     }
     type Mutation {
         evac_toggle(owner:String!):Home
@@ -53,8 +54,11 @@ const start = async () => {
     const Users = Client.db("EvacTrack").collection("Users")
 
     // Gets all users
-    var users = async function({owner}) {
+    var get_all_users = async function() {
         return (Users.find({}).toArray())
+    }
+    var get_all_homes = async function() {
+        return (Homes.find({}).toArray())
     }
 
     // Toggles Evacuation status
@@ -72,7 +76,8 @@ const start = async () => {
 
     // Root resolver
     var root = {
-        users: users,
+        users: get_all_users,
+        homes: get_all_homes,
         evac_toggle: evac_toggle,
         evac: set_evac_true
     };
