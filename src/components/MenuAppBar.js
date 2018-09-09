@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
@@ -30,7 +31,7 @@ const styles = {
 
 class MenuAppBar extends React.Component {
   state = {
-    auth: true,
+    auth: this.props.auth,
     leftMenuOpen: false,
     anchorEl: null,
   };
@@ -48,7 +49,13 @@ class MenuAppBar extends React.Component {
   };
 
   handleLogout = () => {
+    this.props.signout(); 
     this.setState({auth: false, anchorEl: null});
+  };
+
+  handleLogin = () => {
+    this.props.signin();
+    this.setState({auth: true, anchorEl: null}); 
   };
 
   toggleDrawer = () => {
@@ -64,13 +71,15 @@ class MenuAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} onClick={this.toggleDrawer} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
+            { (auth &&
+              <IconButton className={classes.menuButton} onClick={this.toggleDrawer} color="inherit" aria-label="Menu">
+                <MenuIcon />
+              </IconButton>)
+            }
             <Typography variant="title" color="inherit" className={classes.flex}>
-              evacu.tech
+              <Link to='/' style={{textDecoration: 'none', color: 'inherit'}}>EvacuTech</Link>
             </Typography>
-            {auth && (
+            {auth ? (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -94,11 +103,11 @@ class MenuAppBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <Link to='/profile'><MenuItem onClick={this.handleClose}>Profile</MenuItem></Link>
-                  <Link to='/logout'><MenuItem onClick={this.handleClose}>Logout</MenuItem></Link>
+                  <Link to='/profile' style={{textDecoration: 'none'}}><MenuItem onClick={this.handleClose}>Profile</MenuItem></Link>
+                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
-            )}
+            ) : (<Button color="inherit" onClick={this.handleLogin}>Login</Button>) }
           </Toolbar>
         </AppBar>
         <Drawer open={this.state.leftMenuOpen} onClose={this.toggleDrawer}>
@@ -109,12 +118,16 @@ class MenuAppBar extends React.Component {
             onKeyDown={this.toggleDrawer}
           >
             <List component="nav">
-              <ListItem button>
-                <ListItemText primary="Family and Friends" />
-              </ListItem>
-              <Link to='/test'> <ListItem button>
-                <ListItemText primary="Notification of Evacuation" />
-              </ListItem></Link>
+              <Link to='family' style={{textDecoration:'none'}}>
+                <ListItem button>
+                  <ListItemText primary="Family and Friends" />
+                </ListItem>
+              </Link>
+              <Link to='/evacuate' style={{textDecoration:'none'}}> 
+                <ListItem button>
+                  <ListItemText primary="Notification of Evacuation" />
+                </ListItem>
+              </Link>
             </List>
           </div>
         </Drawer>
