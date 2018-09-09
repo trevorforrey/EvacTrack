@@ -22,7 +22,7 @@ var schema = buildSchema(`
     type Evacuation{
         date: String!
         evac_type: String!
-        homes_evacuated:[Home!]
+        homes_evacuated:[Home]!
     }
 
     type Name {
@@ -65,6 +65,11 @@ const start = async () => {
         return (await Homes.find({}).toArray()).map(add_user_to_house)
     }
 
+    // Get all evacuations
+    var get_all_evacuations = async function() {
+        return (await Evacuations.find({}).toArray()).map(add_house_to_evac)
+    }
+
     var add_user_to_house = function(house) {
         user = Users.findOne({_id:house.owner_id})
         house.owner = user
@@ -77,12 +82,13 @@ const start = async () => {
         return user
     }
 
-    // Get all evacuations
-    var get_all_evacuations = async function() {
-        return (await Evacuations.find({}).toArray()).map(function(evac) {
-            evac.date = evac.date.toString()
-            return evac
-        })
+    var add_house_to_evac = function(evac) {
+        for (let i = 0; i < evac.homes_evacuated.length; i++) {
+            let currentHome = evac.homes_evacuated[i]
+            let home = Homes.findOne({_id:currentHome})
+            evac.homes_evacuated[i] = home
+        }
+        return evac
     }
 
     // Toggles Evacuation status
