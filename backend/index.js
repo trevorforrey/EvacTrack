@@ -27,7 +27,7 @@ var schema = buildSchema(`
 `);
 
 const start = async () => {
-    const Client = await MongoClient.connect("mongodb+srv://tforrey:mongopw@evac-db-cluster-mypdv.mongodb.net/test?retryWrites=true")
+    const Client = await MongoClient.connect("mongodb+srv://tforrey:mongopw@evac-db-cluster-mypdv.mongodb.net/test?retryWrites=true",{ useNewUrlParser: true })
     const Homes = Client.db("EvacTrack").collection("Homes")
     // Root resolver
     var toggle_escape = async function({owner}) {
