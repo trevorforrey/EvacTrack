@@ -9,7 +9,7 @@ var schema = buildSchema(`
         name: Name!
         email: String!
         phone_number: String!
-        home: Home!
+        home: Home
         user_type: String!
     }
     type Home {
@@ -55,10 +55,22 @@ const start = async () => {
 
     // Gets all users
     var get_all_users = async function() {
-        return (Users.find({}).toArray())
+        return (await Users.find({}).toArray()).map(add_house_to_user)
     }
     var get_all_homes = async function() {
-        return (Homes.find({}).toArray())
+        return (await Homes.find({}).toArray()).map(add_user_to_house)
+    }
+
+    var add_user_to_house = function(house) {
+        user = Users.findOne({_id:house.owner_id})
+        house.owner = user
+        return house
+    }
+
+    var add_house_to_user = function(user) {
+        house = Homes.findOne({_id:user.home_id})
+        user.home = house
+        return user
     }
 
     // Toggles Evacuation status
