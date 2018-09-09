@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5b942c5ea9a10914c3b31501"},"owner":"Trevor Forrey","address":{"street":"8435 E McDowell rd","city":"Mesa","state":"Arizona","zip":"1234"},"people_in_house":{"$numberInt":"2"},"pets_in_house":{"$numberInt":"1"},"evacuated":false}
+{"_id":{"$oid":"5b944b2b08e83514c310f668"},"owner":"Paul Horton","address":{"street":"1234 E Banana rd","city":"Mesa","state":"Arizona","zip":"1234"},"people_in_house":{"$numberInt":"2"},"pets_in_house":{"$numberInt":"1"},"evacuated":false}
+{"_id":{"$oid":"5b94706fa9a10914c3b3150b"},"owner":"Alli DiNapoli","address":{"street":"5432 N 24th st","city":"Tempe","state":"Arizona","zip":"5678"},"people_in_house":{"$numberInt":"3"},"pets_in_house":{"$numberInt":"0"},"evacuated":false}
+{"_id":{"$oid":"5b947128a9a10914c3b3150c"},"owner":"Cecilia La Place","address":{"street":"4567 N kdkd ave","city":"Glendale","state":"Arizona","zip":"4567"},"people_in_house":{"$numberInt":"4"},"pets_in_house":{"$numberInt":"5"},"evacuated":true}

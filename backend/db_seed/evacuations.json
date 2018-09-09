@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5b946b95a9a10914c3b31503"},"date":{"$date":{"$numberLong":"1453659715000"}},"evac_type":"forest fire","homes_evacuated":[{"$oid":"5b942c5ea9a10914c3b31501"},{"$oid":"5b944b2b08e83514c310f668"}]}
+{"_id":{"$oid":"5b947271a9a10914c3b31511"},"date":{"$date":{"$numberLong":"1372491238000"}},"evac_type":"flooding","homes_evacuated":[{"$oid":"5b94706fa9a10914c3b3150b"},{"$oid":"5b947128a9a10914c3b3150c"}]}
+{"_id":{"$oid":"5b9472efa9a10914c3b31514"},"date":{"$date":{"$numberLong":"824355716000"}},"evac_type":"hurricane","homes_evacuated":[{"$oid":"5b944b2b08e83514c310f668"},{"$oid":"5b947128a9a10914c3b3150c"}]}
